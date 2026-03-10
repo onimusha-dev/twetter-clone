@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * Enhanced fetch wrapper that automatically handles 401 Unauthorized errors
@@ -6,9 +6,9 @@
  */
 async function attemptTokenRotation() {
     try {
-        const res = await fetch("/api/auth/refresh-token", {
-            method: "POST",
-            headers: { "Accept": "application/json" }
+        const res = await fetch('/api/auth/refresh-token', {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
         });
         return res.ok;
     } catch (err) {
@@ -21,7 +21,11 @@ export async function fetchApi(url: string, options: RequestInit = {}) {
 
     // If we get a 401, it likely means the access token expired.
     // We attempt rotation if we're not already trying to auth/refresh or login.
-    if (res.status === 401 && !url.includes("/auth/refresh-token") && !url.includes("/auth/login")) {
+    if (
+        res.status === 401 &&
+        !url.includes('/auth/refresh-token') &&
+        !url.includes('/auth/login')
+    ) {
         const success = await attemptTokenRotation();
         if (success) {
             // If rotation worked (cookies are updated), retry the original request once.
