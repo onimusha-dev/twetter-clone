@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Inter } from 'next/font/google';
+import { Geist, Geist_Mono, Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 
 const geistSans = Geist({
@@ -23,6 +23,8 @@ import { Search, History, Zap, Home, User, Bell } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from "@/lib/utils";
 
+const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
+
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 
@@ -32,7 +34,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={cn("scroll-smooth dark", "font-sans", inter.variable)}>
+        <html lang="en" className={cn("scroll-smooth dark", inter.variable, "font-mono", jetbrainsMono.variable)}>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-primary selection:text-primary-foreground min-h-screen bg-background text-foreground overflow-x-hidden`}>
                 <div className="max-w-[1400px] mx-auto w-full flex min-h-screen relative">
                     <div className="hidden md:block w-[280px] shrink-0 sticky top-0 h-screen">
