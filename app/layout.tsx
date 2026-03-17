@@ -1,43 +1,41 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import QueryProvider from "@/components/providers/query-provider";
-import ThemeProvider from "@/components/providers/theme-provider";
-import { AuthProvider } from "@/components/providers/auth-provider";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
+import QueryProvider from '@/components/providers/query-provider';
+import ThemeProvider from '@/components/providers/theme-provider';
+import { AuthProvider } from '@/components/providers/auth-provider';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+    variable: '--font-geist-sans',
+    subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+    variable: '--font-geist-mono',
+    subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Zerra | Premium Social Clone",
-  description: "Experience the next generation of social interaction with Zerra.",
+    title: 'Zerra | Premium Social Clone',
+    description: 'Experience the next generation of social interaction with Zerra.',
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-primary-ui selection:text-background`}
-      >
-        <QueryProvider>
-          <ThemeProvider>
-            <AuthProvider>
-              {children}
-            </AuthProvider>
-          </ThemeProvider>
-        </QueryProvider>
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en" suppressHydrationWarning>
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-primary-ui selection:text-background`}
+            >
+                <QueryProvider>
+                    <ThemeProvider>
+                        <AuthProvider>{children}</AuthProvider>
+                    </ThemeProvider>
+                </QueryProvider>
+            </body>
+        </html>
+    );
 }

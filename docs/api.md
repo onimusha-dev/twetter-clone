@@ -38,22 +38,22 @@ This document provides a comprehensive list of all backend API routes, their exp
 
 ## 👤 2. Users Module (`/users`)
 
-| Endpoint                       | Method | Protected | Description                     |
-| ------------------------------ | ------ | --------- | ------------------------------- |
-| `/users/profile/:id`           | GET    | No        | Get public profile by ID        |
-| `/users/profile/username/:username` | GET    | No        | Get public profile by username  |
-| `/users/me`                    | GET    | Yes       | Get current user details        |
-| `/users/me`                    | PATCH  | Yes       | Update current profile (Form)   |
-| `/users/me`                    | DELETE | Yes       | Delete current user account     |
-| `/users/me/change-password`    | PATCH  | Yes       | Change user password            |
-| `/users/me/change-email`       | PATCH  | Yes       | Change user email               |
-| `/users/follow/:id`            | POST   | Yes       | Follow a user                   |
-| `/users/unfollow/:id`          | POST   | Yes       | Unfollow a user                 |
-| `/users/followers/:id?`        | GET    | Yes       | Get followers list              |
-| `/users/following/:id?`        | GET    | Yes       | Get following list              |
-| `/users/me/avatar`             | POST   | Yes       | Update avatar image (Form)      |
-| `/users/me/banner`             | POST   | Yes       | Update banner image (Form)      |
-| `/users/me/two-factor-authentication` | PATCH  | Yes       | Toggle 2FA settings             |
+| Endpoint                              | Method | Protected | Description                    |
+| ------------------------------------- | ------ | --------- | ------------------------------ |
+| `/users/profile/:id`                  | GET    | No        | Get public profile by ID       |
+| `/users/profile/username/:username`   | GET    | No        | Get public profile by username |
+| `/users/me`                           | GET    | Yes       | Get current user details       |
+| `/users/me`                           | PATCH  | Yes       | Update current profile (Form)  |
+| `/users/me`                           | DELETE | Yes       | Delete current user account    |
+| `/users/me/change-password`           | PATCH  | Yes       | Change user password           |
+| `/users/me/change-email`              | PATCH  | Yes       | Change user email              |
+| `/users/follow/:id`                   | POST   | Yes       | Follow a user                  |
+| `/users/unfollow/:id`                 | POST   | Yes       | Unfollow a user                |
+| `/users/followers/:id?`               | GET    | Yes       | Get followers list             |
+| `/users/following/:id?`               | GET    | Yes       | Get following list             |
+| `/users/me/avatar`                    | POST   | Yes       | Update avatar image (Form)     |
+| `/users/me/banner`                    | POST   | Yes       | Update banner image (Form)     |
+| `/users/me/two-factor-authentication` | PATCH  | Yes       | Toggle 2FA settings            |
 
 > [!NOTE]
 > Endpoints marked with **(Form)** expect `multipart/form-data`.
@@ -62,18 +62,18 @@ This document provides a comprehensive list of all backend API routes, their exp
 
 ## 📝 3. Posts Module (`/posts`)
 
-| Endpoint                  | Method | Protected | Description                          |
-| ------------------------- | ------ | --------- | ------------------------------------ |
-| `/posts/`                 | GET    | No        | Fetch all posts                      |
-| `/posts/for-you`          | GET    | No        | Fetch personalized algorithmic feed  |
-| `/posts/:id`              | GET    | No        | Fetch post by ID                     |
-| `/posts/author/:authorId` | GET    | No        | Fetch all posts by a specific author |
+| Endpoint                  | Method | Protected | Description                                                      |
+| ------------------------- | ------ | --------- | ---------------------------------------------------------------- |
+| `/posts/`                 | GET    | No        | Fetch all posts                                                  |
+| `/posts/for-you`          | GET    | No        | Fetch personalized algorithmic feed                              |
+| `/posts/:id`              | GET    | No        | Fetch post by ID                                                 |
+| `/posts/author/:authorId` | GET    | No        | Fetch all posts by a specific author                             |
 | `/posts/`                 | POST   | Yes       | Create a new post (unverified max 500 chars, verified unlimited) |
-| `/posts/:id`              | PATCH  | Yes       | Update a post (Owner only)           |
-| `/posts/:id`              | DELETE | Yes       | Delete a post (Owner only)           |
-| `/posts/:id/like`         | POST   | Yes       | Toggle Like on a post                |
-| `/posts/:id/bookmark`     | POST   | Yes       | Toggle Bookmark on a post            |
-| `/posts/search`           | GET    | No        | Search posts by query                |
+| `/posts/:id`              | PATCH  | Yes       | Update a post (Owner only)                                       |
+| `/posts/:id`              | DELETE | Yes       | Delete a post (Owner only)                                       |
+| `/posts/:id/like`         | POST   | Yes       | Toggle Like on a post                                            |
+| `/posts/:id/bookmark`     | POST   | Yes       | Toggle Bookmark on a post                                        |
+| `/posts/search`           | GET    | No        | Search posts by query                                            |
 
 ### Details: Create Post
 
@@ -90,17 +90,17 @@ This document provides a comprehensive list of all backend API routes, their exp
 
 ## 📰 4. Articles Module (`/articles`)
 
-| Endpoint                 | Method | Protected | Description                   |
-| ------------------------ | ------ | --------- | ----------------------------- |
-| `/articles/`             | GET    | No        | Fetch all articles            |
+| Endpoint                 | Method | Protected | Description                         |
+| ------------------------ | ------ | --------- | ----------------------------------- |
+| `/articles/`             | GET    | No        | Fetch all articles                  |
 | `/articles/for-you`      | GET    | No        | Fetch personalized algorithmic feed |
-| `/articles/:id`          | GET    | No        | Fetch article by ID           |
-| `/articles/user/:userId` | GET    | No        | Fetch all articles by a user  |
-| `/articles/`             | POST   | Yes       | Create a new article (Form)   |
-| `/articles/:id`          | PATCH  | Yes       | Update an article             |
-| `/articles/:id`          | DELETE | Yes       | Delete an article             |
-| `/articles/:id/like`     | POST   | Yes       | Toggle Like on an article     |
-| `/articles/:id/bookmark` | POST   | Yes       | Toggle Bookmark on an article |
+| `/articles/:id`          | GET    | No        | Fetch article by ID                 |
+| `/articles/user/:userId` | GET    | No        | Fetch all articles by a user        |
+| `/articles/`             | POST   | Yes       | Create a new article (Form)         |
+| `/articles/:id`          | PATCH  | Yes       | Update an article                   |
+| `/articles/:id`          | DELETE | Yes       | Delete an article                   |
+| `/articles/:id/like`     | POST   | Yes       | Toggle Like on an article           |
+| `/articles/:id/bookmark` | POST   | Yes       | Toggle Bookmark on an article       |
 
 ---
 
@@ -137,13 +137,13 @@ This document provides a comprehensive list of all backend API routes, their exp
 
 ## 🌿 6. Fern AI Module (`/fern`)
 
-| Endpoint                | Method | Protected | Description                     |
-| ----------------------- | ------ | --------- | ------------------------------- |
-| `/fern/chats`           | GET    | Yes       | Get all user chat sessions      |
-| `/fern/:chatId`         | GET    | Yes       | Get messages for a session      |
-| `/fern/:chatId/message` | POST   | Yes       | Send prompt to AI               |
-| `/fern/:chatId/rename`  | POST   | Yes       | Rename a chat session           |
-| `/fern/:chatId`         | DELETE | Yes       | Delete a chat session           |
+| Endpoint                | Method | Protected | Description                |
+| ----------------------- | ------ | --------- | -------------------------- |
+| `/fern/chats`           | GET    | Yes       | Get all user chat sessions |
+| `/fern/:chatId`         | GET    | Yes       | Get messages for a session |
+| `/fern/:chatId/message` | POST   | Yes       | Send prompt to AI          |
+| `/fern/:chatId/rename`  | POST   | Yes       | Rename a chat session      |
+| `/fern/:chatId`         | DELETE | Yes       | Delete a chat session      |
 
 ### Details: Send Message
 
