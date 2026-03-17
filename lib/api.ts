@@ -64,26 +64,29 @@ api.interceptors.response.use(
             isRefreshing = true;
 
             try {
+                // The refresh token is stored in an HTTP-only cookie, 
+                // so we just need withCredentials: true
                 const { data } = await axios.post(
                     `${API_URL}/auth/refresh-token`,
                     {},
                     { withCredentials: true },
                 );
 
-                if (data?.data?.accessToken) {
-                    useAuthStore.getState().setToken(data.data.accessToken);
-                    api.defaults.headers.common['Authorization'] =
-                        `Bearer ${data.data.accessToken}`;
-                    originalRequest.headers.Authorization = `Bearer ${data.data.accessToken}`;
+                const newToken = data?.data?.accessToken || data?.accessToken;
 
-                    processQueue(null, data.data.accessToken);
+                if (newToken) {
+                    useAuthStore.getState().setToken(newToken);
+                    api.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
+                    originalRequest.headers.Authorization = `Bearer ${newToken}`;
+
+                    processQueue(null, newToken);
                     return api(originalRequest);
                 } else {
-                    throw new Error('No token returned');
+                    throw new Error('Refresh failed - no token returned');
                 }
             } catch (err) {
                 processQueue(err, null);
-                console.warn('[API] Session expired. Please log in again.');
+                console.warn('[API] Session expired or refresh failed.');
                 if (typeof window !== 'undefined') {
                     useAuthStore.getState().logout();
                 }
