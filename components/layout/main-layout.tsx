@@ -13,6 +13,8 @@ import {
     MoreHorizontal,
     Sparkles,
     Plus,
+    Menu,
+    X,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useAuthStore } from '@/stores/useAuthStore';
@@ -23,6 +25,16 @@ interface MainLayoutProps {
     children: React.ReactNode;
     hideSidebar?: boolean;
 }
+interface INavItems { icon: any, label: string, href: string, isMobile: boolean }
+export const navItems: INavItems[] = [
+    { icon: Home, label: 'Home', href: '/', isMobile: true },
+    { icon: Search, label: 'Explore', href: '/explore', isMobile: true },
+    { icon: Bell, label: 'Notifications', href: '/notifications', isMobile: true },
+    { icon: Mail, label: 'Messages', href: '/messages', isMobile: false },
+    { icon: Bookmark, label: 'Bookmarks', href: '/bookmarks', isMobile: false },
+    { icon: Sparkles, label: 'Fern AI', href: '/fern', isMobile: false },
+    { icon: Settings, label: 'Settings', href: '/settings', isMobile: false },
+];
 
 export default function MainLayout({ children, hideSidebar = false }: MainLayoutProps) {
     const { user, isAuthenticated, logout } = useAuthStore();
@@ -33,19 +45,14 @@ export default function MainLayout({ children, hideSidebar = false }: MainLayout
         setMounted(true);
     }, []);
 
-    const navItems = [
-        { icon: Home, label: 'Home', href: '/' },
-        { icon: Search, label: 'Explore', href: '/explore' },
-        { icon: Bell, label: 'Notifications', href: '/notifications' },
-        { icon: Mail, label: 'Messages', href: '/messages' },
-        { icon: Bookmark, label: 'Bookmarks', href: '/bookmarks' },
-        { icon: Sparkles, label: 'Fern AI', href: '/fern' },
+    const localNavItems: INavItems[] = [
+        ...navItems,
         {
             icon: User,
             label: 'Profile',
             href: mounted && isAuthenticated && user ? `/profile/${user.username}` : '/auth/login',
+            isMobile: true
         },
-        { icon: Settings, label: 'Settings', href: '/settings' },
     ];
 
     return (
@@ -60,11 +67,12 @@ export default function MainLayout({ children, hideSidebar = false }: MainLayout
                     </div>
 
                     <nav className="flex w-full items-center justify-around sm:mt-4 sm:flex-col sm:items-end md:items-start">
-                        {navItems.map((item) => (
+                        {localNavItems.map((item) => (
                             <Link
                                 key={item.label}
                                 href={item.href}
-                                className="group flex items-center gap-4 rounded-full p-3 transition-colors hover:bg-secondary-ui select-none"
+                                className={`${item.isMobile ? 'flex' : "hidden md:flex"}
+                                        group items-center gap-4 rounded-full p-3 transition-colors hover:bg-secondary-ui select-none`}
                             >
                                 <item.icon className="h-7 w-7 text-foreground" />
                                 <span className="hidden text-xl font-medium md:block">
@@ -174,3 +182,55 @@ export default function MainLayout({ children, hideSidebar = false }: MainLayout
         </div>
     );
 }
+
+export const MobileSideBar = ({ navItems }: { navItems: INavItems[] }) => {
+    const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
+    return (
+        <>
+            {/* MENU BUTTON */}
+            <button
+                onClick={() => setMobileMenuOpen(true)}
+                className="z-45 sm:hidden rounded-full p-2 hover:bg-secondary-ui bg-background/80 backdrop-blur"
+            >
+                <Menu className="h-6 w-6" />
+            </button>
+            {/* OVERLAY */}
+            {mobileMenuOpen && (
+                <div
+                    className="fixed inset-0 z-40 bg-black/50 sm:hidden w-full h-screen"
+                    onClick={() => setMobileMenuOpen(false)}
+                />
+            )}
+
+            {/* SIDEBAR */}
+            <aside className={cn(
+                "fixed top-0 left-0 z-50 h-screen w-[260px] bg-background border-r p-4 transform transition-transform duration-300 sm:hidden flex flex-col",
+                mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+            )}>
+                {/* HEADER */}
+                <div className="flex items-center justify-between mb-6">
+                    <span className="font-bold text-lg ml-3">Menu</span>
+                    <button onClick={() => setMobileMenuOpen(false)}>
+                        <X className="h-6 w-6" />
+                    </button>
+                </div>
+
+                {/* NAV ITEMS (FIX: show ALL items) */}
+                <nav className="flex flex-col gap-2">
+                    {navItems.map((item) => (
+                        <Link
+                            key={item.label}
+                            href={item.href}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="flex items-center gap-3 rounded-lg p-3 hover:bg-secondary-ui transition-colors"
+                        >
+                            <item.icon className="h-5 w-5" />
+                            <span>{item.label}</span>
+                        </Link>
+                    ))}
+                </nav>
+            </aside>
+        </>
+    );
+};

@@ -150,15 +150,15 @@ export default function ComposeBox() {
                                 href="/articles/create"
                                 className="flex items-center gap-1.5 rounded-full px-3 py-1.5 hover:bg-primary-ui/10 transition-colors font-medium text-sm"
                             >
-                                <FileText className="h-4 w-4" />
-                                Write Article
+                                <FileText className="h-5 w-5" />
+                                <span className="hidden md:flex">Write Article</span>
                             </Link>
                         </div>
                         <div className="flex items-center gap-4">
                             <div className="flex items-center gap-2">
                                 <span
                                     className={cn(
-                                        'text-xs font-medium',
+                                        'text-xs font-medium select-none',
                                         !user?.isVerified && content.length > 500
                                             ? 'text-red-500'
                                             : 'text-secondary-foreground opacity-40',
