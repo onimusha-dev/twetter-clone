@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { useAuthStore } from '@/stores/useAuthStore';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '') || 'https://zerra-backend-378c.onrender.com';
+// Automatically pick backend based on environment
+const API_URL =
+    process.env.NODE_ENV === 'development'
+        ? 'http://localhost:9000' // your dev backend
+        : 'https://zerra-backend-378c.onrender.com'; // production backend
 
 const api = axios.create({
     baseURL: API_URL,
@@ -11,7 +15,7 @@ const api = axios.create({
     },
 });
 
-// Request Interceptor for Auth
+// === Request Interceptor for Auth ===
 api.interceptors.request.use((config) => {
     if (typeof window !== 'undefined') {
         const token = localStorage.getItem('zerra_token');
@@ -22,6 +26,7 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
+// === Token Refresh Queue Handling ===
 let isRefreshing = false;
 let failedQueue: any[] = [];
 
@@ -36,7 +41,7 @@ const processQueue = (error: any, token: string | null = null) => {
     failedQueue = [];
 };
 
-// Response Interceptor for Error Handling
+// === Response Interceptor for Error Handling & Token Refresh ===
 api.interceptors.response.use(
     (response) => response,
     async (error) => {
@@ -55,21 +60,17 @@ api.interceptors.response.use(
                         originalRequest.headers.Authorization = `Bearer ${token}`;
                         return api(originalRequest);
                     })
-                    .catch((err) => {
-                        return Promise.reject(err);
-                    });
+                    .catch((err) => Promise.reject(err));
             }
 
             originalRequest._retry = true;
             isRefreshing = true;
 
             try {
-                // The refresh token is stored in an HTTP-only cookie, 
-                // so we just need withCredentials: true
                 const { data } = await axios.post(
                     `${API_URL}/auth/refresh-token`,
                     {},
-                    { withCredentials: true },
+                    { withCredentials: true }
                 );
 
                 const newToken = data?.data?.accessToken || data?.accessToken;
@@ -97,7 +98,7 @@ api.interceptors.response.use(
         }
 
         return Promise.reject(error);
-    },
+    }
 );
 
 export default api;

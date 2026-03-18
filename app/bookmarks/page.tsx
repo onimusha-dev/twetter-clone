@@ -19,7 +19,7 @@ export default function BookmarksPage() {
     return (
         <MainLayout>
             <div className="flex h-14 items-center border-b px-4 sticky top-0 bg-background/80 backdrop-blur-md z-10 justify-between">
-                <div className='flex gap-2 select-none items-center'>
+                <div className='flex gap-2   items-center'>
                     <MobileSideBar navItems={navItems} />
                     <h2 className="text-xl font-bold">{user?.name || 'Bookmarks'}</h2>
                 </div>
@@ -54,7 +54,7 @@ export default function BookmarksPage() {
                     />
                 </div>
             ) : (
-                <div className="flex flex-col items-center justify-center h-[60vh] p-8 text-center max-w-sm mx-auto select-none">
+                <div className="flex flex-col items-center justify-center h-[60vh] p-8 text-center max-w-sm mx-auto  ">
                     <div className="h-20 w-20 rounded-full bg-secondary-ui flex items-center justify-center mb-6">
                         <BookmarkIcon className="h-10 w-10 text-primary-ui opacity-40 shrink-0" />
                     </div>

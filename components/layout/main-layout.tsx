@@ -57,11 +57,11 @@ export default function MainLayout({ children, hideSidebar = false }: MainLayout
 
     return (
         <div className="flex min-h-screen justify-center transition-colors duration-300">
-            <div className="flex w-full max-w-[1265px] px-0 sm:px-4">
+            <div className="flex w-full max-w-316.25 px-0 sm:px-4">
                 {/* Left Sidebar - Navigation */}
-                <header className="fixed bottom-0 z-10 flex h-16 w-full items-center justify-around border-t bg-background px-2 sm:sticky sm:top-0 sm:h-screen sm:w-20 sm:flex-col sm:items-end sm:justify-start sm:border-r sm:border-t-0 sm:pb-4 sm:pt-2 md:w-[275px] md:items-start lg:w-[275px]">
+                <header className="fixed bottom-0 z-10 flex h-16 w-full items-center justify-around border-t bg-background px-2 sm:sticky sm:top-0 sm:h-screen sm:w-20 sm:flex-col sm:items-end sm:justify-start sm:border-r sm:border-t-0 sm:pb-4 sm:pt-2 md:w-68.75 md:items-start lg:w-68.75">
                     <div className="hidden items-center justify-center p-3 sm:flex">
-                        <div className="h-8 w-8 rounded-full bg-primary-ui flex items-center justify-center text-background font-bold text-xl italic select-none">
+                        <div className="h-8 w-8 rounded-full bg-primary-ui flex items-center justify-center text-background font-bold text-xl italic  ">
                             Z
                         </div>
                     </div>
@@ -72,7 +72,7 @@ export default function MainLayout({ children, hideSidebar = false }: MainLayout
                                 key={item.label}
                                 href={item.href}
                                 className={`${item.isMobile ? 'flex' : "hidden md:flex"}
-                                        group items-center gap-4 rounded-full p-3 transition-colors hover:bg-secondary-ui select-none`}
+                                        group items-center gap-4 rounded-full p-3 transition-colors hover:bg-secondary-ui  `}
                             >
                                 <item.icon className="h-7 w-7 text-foreground" />
                                 <span className="hidden text-xl font-medium md:block">
@@ -82,7 +82,7 @@ export default function MainLayout({ children, hideSidebar = false }: MainLayout
                         ))}
                     </nav>
 
-                    <div className="w-full px-2 sm:px-4 mt-2 sm:mt-6 hidden sm:block select-none">
+                    <div className="w-full px-2 sm:px-4 mt-2 sm:mt-6 hidden sm:block  ">
                         <Link
                             href="/articles/create"
                             className="flex w-full items-center justify-center gap-2 rounded-full bg-foreground py-3.5 font-bold text-background shadow-lg transition-transform hover:scale-[1.02] active:scale-[0.98]"
@@ -92,7 +92,7 @@ export default function MainLayout({ children, hideSidebar = false }: MainLayout
                         </Link>
                     </div>
 
-                    <div className="mt-auto hidden w-full sm:block select-none">
+                    <div className="mt-auto hidden w-full sm:block  ">
                         {isAuthenticated && user ? (
                             <div className="flex w-full items-center gap-3 rounded-full p-3 transition-colors hover:bg-secondary-ui md:px-3 cursor-pointer group relative">
                                 <div className="h-10 w-10 shrink-0 rounded-full bg-accent-ui flex items-center justify-center overflow-hidden border border-border-ui">
@@ -107,11 +107,11 @@ export default function MainLayout({ children, hideSidebar = false }: MainLayout
                                     )}
                                 </div>
                                 <div className="hidden flex-col md:flex">
-                                    <span className="text-sm font-bold truncate max-w-[120px] flex items-center gap-1">
+                                    <span className="text-sm font-bold truncate max-w-30 flex items-center gap-1">
                                         {user.name}
                                         {user.isVerified && <VerificationBadge size={14} />}
                                     </span>
-                                    <span className="text-xs text-secondary-foreground opacity-60 truncate max-w-[120px]">
+                                    <span className="text-xs text-secondary-foreground opacity-60 truncate max-w-30">
                                         @{user.username}
                                     </span>
                                 </div>
@@ -140,7 +140,7 @@ export default function MainLayout({ children, hideSidebar = false }: MainLayout
                 <main
                     className={cn(
                         'grow border-x w-full min-h-screen pb-16 sm:pb-0',
-                        !hideSidebar && 'max-w-[600px]',
+                        !hideSidebar && 'max-w-150',
                     )}
                 >
                     {children}
@@ -148,7 +148,7 @@ export default function MainLayout({ children, hideSidebar = false }: MainLayout
 
                 {/* Right Sidebar - Trends/Search */}
                 {!hideSidebar && (
-                    <aside className="hidden w-[290px] flex-col gap-4 p-4 lg:flex xl:w-[350px]">
+                    <aside className="hidden w-72.5 flex-col gap-4 p-4 lg:flex xl:w-87.5">
                         <div className="sticky top-0 flex flex-col gap-4 pt-2">
                             <div className="relative">
                                 <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-secondary-foreground opacity-50" />
@@ -205,7 +205,7 @@ export const MobileSideBar = ({ navItems }: { navItems: INavItems[] }) => {
 
             {/* SIDEBAR */}
             <aside className={cn(
-                "fixed top-0 left-0 z-50 h-screen w-[260px] bg-background border-r p-4 transform transition-transform duration-300 sm:hidden flex flex-col",
+                "fixed top-0 left-0 z-50 h-screen w-65 bg-background border-r p-4 transform transition-transform duration-300 sm:hidden flex flex-col",
                 mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
             )}>
                 {/* HEADER */}

@@ -67,7 +67,7 @@ export default function ExplorePage() {
                         />
                     </>
                 ) : (
-                    <div className="flex flex-col p-12 items-center text-center select-none">
+                    <div className="flex flex-col p-12 items-center text-center  ">
                         <TrendingUp className="h-10 w-10 text-primary-ui opacity-20 mb-4" />
                         <h3 className="text-xl font-bold">Nothing is trending yet</h3>
                         <p className="text-secondary-foreground opacity-60 max-w-xs mt-2">
