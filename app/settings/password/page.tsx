@@ -106,7 +106,11 @@ export default function PasswordSettingsPage() {
                                 onClick={() => setShowOldPassword(!showOldPassword)}
                                 className="absolute right-4 top-1/2 -translate-y-1/2 opacity-40 hover:opacity-100 transition-opacity"
                             >
-                                {showOldPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                                {showOldPassword ? (
+                                    <EyeOff className="h-5 w-5" />
+                                ) : (
+                                    <Eye className="h-5 w-5" />
+                                )}
                             </button>
                         </div>
                         <span className="text-xs opacity-60 pl-1">
@@ -134,7 +138,11 @@ export default function PasswordSettingsPage() {
                                 onClick={() => setShowNewPassword(!showNewPassword)}
                                 className="absolute right-4 top-1/2 -translate-y-1/2 opacity-40 hover:opacity-100 transition-opacity"
                             >
-                                {showNewPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                                {showNewPassword ? (
+                                    <EyeOff className="h-5 w-5" />
+                                ) : (
+                                    <Eye className="h-5 w-5" />
+                                )}
                             </button>
                         </div>
                     </div>
@@ -157,7 +165,11 @@ export default function PasswordSettingsPage() {
                                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                                 className="absolute right-4 top-1/2 -translate-y-1/2 opacity-40 hover:opacity-100 transition-opacity"
                             >
-                                {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                                {showConfirmPassword ? (
+                                    <EyeOff className="h-5 w-5" />
+                                ) : (
+                                    <Eye className="h-5 w-5" />
+                                )}
                             </button>
                         </div>
                     </div>

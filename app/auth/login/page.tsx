@@ -75,22 +75,22 @@ export default function LoginPage() {
                                 onClick={() => setShowPassword(!showPassword)}
                                 className="absolute right-4 top-1/2 -translate-y-1/2 opacity-40 hover:opacity-100 transition-opacity"
                             >
-                                    {showPassword ? (
-                                        <EyeOff className="h-5 w-5" />
-                                    ) : (
-                                        <Eye className="h-5 w-5" />
-                                    )}
-                                </button>
-                            </div>
-                            <div className="flex justify-end pr-2">
-                                <Link
-                                    href="/auth/forgot-password"
-                                    className="text-xs font-semibold text-primary-ui hover:underline px-1 py-1"
-                                >
-                                    Forgot password?
-                                </Link>
-                            </div>
+                                {showPassword ? (
+                                    <EyeOff className="h-5 w-5" />
+                                ) : (
+                                    <Eye className="h-5 w-5" />
+                                )}
+                            </button>
                         </div>
+                        <div className="flex justify-end pr-2">
+                            <Link
+                                href="/auth/forgot-password"
+                                className="text-xs font-semibold text-primary-ui hover:underline px-1 py-1"
+                            >
+                                Forgot password?
+                            </Link>
+                        </div>
+                    </div>
 
                     {loginMutation.isError && (
                         <motion.div

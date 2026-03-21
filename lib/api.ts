@@ -70,7 +70,7 @@ api.interceptors.response.use(
                 const { data } = await axios.post(
                     `${API_URL}/auth/refresh-token`,
                     {},
-                    { withCredentials: true }
+                    { withCredentials: true },
                 );
 
                 const newToken = data?.data?.accessToken || data?.accessToken;
@@ -98,7 +98,7 @@ api.interceptors.response.use(
         }
 
         return Promise.reject(error);
-    }
+    },
 );
 
 export default api;

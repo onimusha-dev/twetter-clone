@@ -21,7 +21,12 @@ interface PostCardProps {
     canSelect?: boolean;
 }
 
-export default function PostCard({ post, className, isDetailedView = false, canSelect = false }: PostCardProps) {
+export default function PostCard({
+    post,
+    className,
+    isDetailedView = false,
+    canSelect = false,
+}: PostCardProps) {
     const {
         author: postAuthor,
         user: postUser,
@@ -268,7 +273,8 @@ export default function PostCard({ post, className, isDetailedView = false, canS
                             className={cn(
                                 'text-[15px] leading-normal whitespace-pre-wrap wrap-break-word transition-all',
                                 !isDetailedView && !isExpanded && 'line-clamp-4',
-                                isDetailedView && 'text-[16px]', canSelect && 'select-text'
+                                isDetailedView && 'text-[16px]',
+                                canSelect && 'select-text',
                             )}
                         >
                             {content}
