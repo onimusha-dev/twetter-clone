@@ -17,9 +17,19 @@ function VerifyEmailContent() {
     const [isVerifying, setIsVerifying] = useState(false);
 
     useEffect(() => {
-        if (email && (token || code) && !verifyEmailMutation.isSuccess && !verifyEmailMutation.isError && !isVerifying) {
+        if (
+            email &&
+            (token || code) &&
+            !verifyEmailMutation.isSuccess &&
+            !verifyEmailMutation.isError &&
+            !isVerifying
+        ) {
             setIsVerifying(true);
-            verifyEmailMutation.mutate({ email, token: token || undefined, code: code || undefined });
+            verifyEmailMutation.mutate({
+                email,
+                token: token || undefined,
+                code: code || undefined,
+            });
         }
     }, [email, token, code, verifyEmailMutation, isVerifying]);
 
@@ -35,7 +45,8 @@ function VerifyEmailContent() {
                 </div>
                 <h2 className="text-3xl font-bold">Email Verified!</h2>
                 <p className="mt-2 text-sm text-secondary-foreground opacity-60">
-                    Your email has been successfully verified. You can now use all the features of Zerra.
+                    Your email has been successfully verified. You can now use all the features of
+                    Zerra.
                 </p>
                 <button
                     onClick={() => router.push('/auth/login')}
@@ -60,8 +71,8 @@ function VerifyEmailContent() {
                 </div>
                 <h2 className="text-3xl font-bold">Verification Failed</h2>
                 <p className="mt-2 text-sm text-secondary-foreground opacity-60">
-                    {(verifyEmailMutation.error as any)?.response?.data?.message || 
-                        "The verification link is invalid or has expired."}
+                    {(verifyEmailMutation.error as any)?.response?.data?.message ||
+                        'The verification link is invalid or has expired.'}
                 </p>
                 <button
                     onClick={() => router.push('/auth/login')}
@@ -96,12 +107,14 @@ function VerifyEmailContent() {
 export default function VerifyEmailPage() {
     return (
         <div className="flex min-h-screen items-center justify-center bg-background px-4">
-            <Suspense fallback={
-                <div className="flex flex-col items-center gap-4">
-                    <Loader2 className="h-12 w-12 animate-spin text-primary-ui opacity-50" />
-                    <p className="text-sm opacity-60">Loading...</p>
-                </div>
-            }>
+            <Suspense
+                fallback={
+                    <div className="flex flex-col items-center gap-4">
+                        <Loader2 className="h-12 w-12 animate-spin text-primary-ui opacity-50" />
+                        <p className="text-sm opacity-60">Loading...</p>
+                    </div>
+                }
+            >
                 <VerifyEmailContent />
             </Suspense>
         </div>

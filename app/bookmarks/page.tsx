@@ -19,7 +19,7 @@ export default function BookmarksPage() {
     return (
         <MainLayout>
             <div className="flex h-14 items-center border-b px-4 sticky top-0 bg-background/80 backdrop-blur-md z-10 justify-between">
-                <div className='flex gap-2   items-center'>
+                <div className="flex gap-2   items-center">
                     <MobileSideBar navItems={navItems} />
                     <h2 className="text-xl font-bold">{user?.name || 'Bookmarks'}</h2>
                 </div>

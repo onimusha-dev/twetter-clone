@@ -50,7 +50,10 @@ export const useAuthMutations = () => {
                             setAuth(userData, token);
                         }
                     } catch (error) {
-                        console.error('[useAuthMutations] Failed to fetch user after login:', error);
+                        console.error(
+                            '[useAuthMutations] Failed to fetch user after login:',
+                            error,
+                        );
                     }
                 }
             } else {
