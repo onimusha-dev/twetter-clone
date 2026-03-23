@@ -1,11 +1,12 @@
 import { VerificationBadge } from "@/components/ui/verification-badge";
 import { getMediaUrl } from "@/lib/utils";
+import Link from "next/link";
 
-export default function ProfileCard({ profile, key }: { profile: any, key: number }) {
+export default function ProfileCard({ profile, username }: { profile: any, username: string }) {
 
     return (
-        <div key={key}
-            className="flex gap-3 px-5 cursor-pointer">
+        <Link href={`/profile/${username}`}
+            className="flex gap-3 p-5 cursor-pointer transition-colors hover:bg-secondary-ui/10">
             <div className="">
                 <div className="h-15 w-15 overflow-hidden rounded-full bg-accent-ui border border-border-ui">
                     {profile.avatar ? (
@@ -33,6 +34,6 @@ export default function ProfileCard({ profile, key }: { profile: any, key: numbe
                 </div>
                 <p className="line-clamp-2">{profile.bio} this is  a cat i wanna have it as my pet as i like big cats. this is  a cat i wanna have it as my pet as i like big cats. this is  a cat i wanna have it as my pet as i like big cats. this is  a cat i wanna have it as my pet as i like big cats.</p>
             </div>
-        </div>
+        </Link>
     )
 }

@@ -67,10 +67,10 @@ export default function Followers({ params }: ProfilePageProps) {
     return (
         <MainLayout>
             <FollowingFollowersHeader profile={profile} isOwn={isOwn} headerType='followers' />
-            <div className="flex flex-col gap-5 mt-5 mb-15">
+            <div className="flex flex-col mt-5 mb-15">
                 {
                     Array(10).fill(0).map((item, key) =>
-                        <ProfileCard profile={profile} key={key} />)
+                        <ProfileCard profile={profile} key={key} username={profile.username} />)
                 }
             </div>
         </MainLayout>
