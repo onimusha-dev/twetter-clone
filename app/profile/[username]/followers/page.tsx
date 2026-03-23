@@ -9,6 +9,7 @@ import { useUserLikes } from '@/hooks/queries/useUserLikes';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import FollowingFollowersHeader from '@/components/features/profile/following-followers-header';
+import ProfileCard from '@/components/features/profile/profile-card';
 
 
 interface ProfilePageProps {
@@ -64,11 +65,14 @@ export default function Followers({ params }: ProfilePageProps) {
     const isOwn = currentUser?.username === username;
 
     return (
-
-        <>
-            <FollowingFollowersHeader profile={profile} isOwn={isOwn} headerType='followers'/>
-
-            <div>followers {profile.followersCount}</div>
-        </>
+        <MainLayout>
+            <FollowingFollowersHeader profile={profile} isOwn={isOwn} headerType='followers' />
+            <div className="flex flex-col gap-5 mt-5 mb-15">
+                {
+                    Array(10).fill(0).map((item, key) =>
+                        <ProfileCard profile={profile} key={key} />)
+                }
+            </div>
+        </MainLayout>
     )
 }

@@ -25,7 +25,7 @@ export default function ProfileHeader({ profile, isOwn }: ProfileHeaderProps) {
                 <div className="flex h-14 items-center gap-6 px-4 sticky top-0 bg-background/80 backdrop-blur-md z-20  ">
                     <button
                         onClick={() => router.back()}
-                        className="rounded-full p-2 hover:bg-secondary-ui transition-colors text-foreground"
+                        className="rounded-full p-2 hover:bg-secondary-ui transition-colors text-foreground cursor-pointer"
                     >
                         <ArrowLeft className="h-5 w-5" />
                     </button>
