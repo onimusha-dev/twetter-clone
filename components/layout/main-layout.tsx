@@ -26,7 +26,6 @@ interface MainLayoutProps {
     children: React.ReactNode;
     hideSidebar?: boolean;
 }
-
 export const navItems: INavItems[] = [
     { icon: Home, label: 'Home', href: '/', isMobile: true },
     { icon: Search, label: 'Explore', href: '/explore', isMobile: true },
