@@ -12,9 +12,10 @@ import Link from 'next/link';
 interface ProfileHeaderProps {
     profile: Profile;
     isOwn?: boolean;
+    headerType: "following" | "followers";
 }
 
-export default function ProfileHeader({ profile, isOwn }: ProfileHeaderProps) {
+export default function FollowingFollowersHeader({ profile, isOwn, headerType}: ProfileHeaderProps) {
     const router = useRouter();
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -37,7 +38,7 @@ export default function ProfileHeader({ profile, isOwn }: ProfileHeaderProps) {
                             {profile.isVerified && <VerificationBadge size={18} />}
                         </div>
                         <span className="text-sm text-secondary-foreground opacity-60">
-                            {profile.postsCount} Posts
+                            {profile.postsCount} {headerType ? 'Following' : 'followers'}
                         </span>
                     </div>
                 </div>
