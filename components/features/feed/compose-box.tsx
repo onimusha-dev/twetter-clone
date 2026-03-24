@@ -66,7 +66,11 @@ export default function ComposeBox() {
             <div className="flex gap-3 w-full">
                 <div className="h-10 w-10 shrink-0 rounded-full bg-secondary-ui flex items-center justify-center overflow-hidden border border-border-ui">
                     {user?.avatar ? (
-                        <img src={getMediaUrl(user.avatar)} alt="Avatar" className="h-full w-full object-cover" />
+                        <img
+                            src={getMediaUrl(user.avatar)}
+                            alt="Avatar"
+                            className="h-full w-full object-cover"
+                        />
                     ) : (
                         <User className="h-5 w-5 opacity-40" />
                     )}
@@ -81,12 +85,17 @@ export default function ComposeBox() {
                         rows={1}
                         onInput={(e) => {
                             e.currentTarget.style.height = 'auto';
-                            e.currentTarget.style.height = Math.min(e.currentTarget.scrollHeight, 200) + 'px';
+                            e.currentTarget.style.height =
+                                Math.min(e.currentTarget.scrollHeight, 200) + 'px';
                         }}
                     />
                     {mediaPreview && (
                         <div className="relative mt-2 rounded-2xl overflow-hidden border border-border-ui w-fit max-w-full">
-                            <img src={mediaPreview} alt="Preview" className="max-h-75 object-contain bg-secondary-ui/20" />
+                            <img
+                                src={mediaPreview}
+                                alt="Preview"
+                                className="max-h-75 object-contain bg-secondary-ui/20"
+                            />
                             <button
                                 onClick={removeMedia}
                                 className="absolute top-2 right-2 h-8 w-8 bg-black/60 text-white rounded-full flex items-center justify-center hover:bg-black transition-colors"
@@ -119,7 +128,7 @@ export default function ComposeBox() {
                                         'text-xs font-medium',
                                         !user?.isVerified && content.length > 500
                                             ? 'text-red-500'
-                                            : 'text-secondary-foreground opacity-40'
+                                            : 'text-secondary-foreground opacity-40',
                                     )}
                                 >
                                     {content.length}
@@ -130,17 +139,29 @@ export default function ComposeBox() {
                             <div className="flex items-center gap-2">
                                 <button
                                     onClick={() => handleSubmit(false)}
-                                    disabled={(!content.trim() && !media) || isPending || (!user?.isVerified && content.length > 500)}
+                                    disabled={
+                                        (!content.trim() && !media) ||
+                                        isPending ||
+                                        (!user?.isVerified && content.length > 500)
+                                    }
                                     className="rounded-full border border-border-ui px-4 py-1.5 text-sm font-bold hover:bg-secondary-ui transition-colors disabled:opacity-50"
                                 >
                                     Draft
                                 </button>
                                 <button
                                     onClick={() => handleSubmit(true)}
-                                    disabled={(!content.trim() && !media) || isPending || (!user?.isVerified && content.length > 500)}
+                                    disabled={
+                                        (!content.trim() && !media) ||
+                                        isPending ||
+                                        (!user?.isVerified && content.length > 500)
+                                    }
                                     className="flex items-center gap-2 rounded-full bg-foreground px-5 py-1.5 font-bold text-background transition-transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100"
                                 >
-                                    {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Post'}
+                                    {isPending ? (
+                                        <Loader2 className="h-4 w-4 animate-spin" />
+                                    ) : (
+                                        'Post'
+                                    )}
                                 </button>
                             </div>
                         </div>

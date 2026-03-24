@@ -1,16 +1,13 @@
-"use client"
+'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import MainLayout from '@/components/layout/main-layout';
-import { useProfile } from '@/hooks/queries/useProfile';
-import { useUserPosts, useUserArticles } from '@/hooks/queries/useUserContent';
+import { useGetFollowers, useProfile } from '@/hooks/queries/useProfile';
 import { useAuthStore } from '@/stores/useAuthStore';
-import { useUserLikes } from '@/hooks/queries/useUserLikes';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import FollowingFollowersHeader from '@/components/features/profile/following-followers-header';
 import ProfileCard from '@/components/features/profile/profile-card';
-
 
 interface ProfilePageProps {
     params: Promise<{ username: string }>;
@@ -18,28 +15,35 @@ interface ProfilePageProps {
 
 export default function Followers({ params }: ProfilePageProps) {
     const { username } = React.use(params);
-    const { data: response, isLoading: isProfileLoading, isError } = useProfile(username);
-    const { user: currentUser, isAuthenticated, _hasHydrated } = useAuthStore();
-    const router = useRouter();
 
-    const [activeTab, setActiveTab] = useState('posts');
+    const router = useRouter();
+    const { user: currentUser, isAuthenticated, _hasHydrated } = useAuthStore();
+
+    // Fetch profile
+    const {
+        data: response,
+        isLoading: isProfileLoading,
+        isError,
+    } = useProfile(username);
 
     const profile = response?.data;
-    const posts = useUserPosts(profile?.id, { enabled: activeTab === 'posts' });
-    const articles = useUserArticles(profile?.id, { enabled: activeTab === 'articles' });
-    const likes = useUserLikes(username, profile?.id, { enabled: activeTab === 'likes' });
 
-    const allPosts = posts.data?.pages.flat() || [];
-    const allArticles = articles.data?.pages.flat() || [];
-    const allLikes = likes.data?.pages.flat() || [];
+    // Fetch followers (React Query)
+    const {
+        data: followersList,
+        isLoading: isFollowersLoading,
+    } = useGetFollowers(profile?.id!);
 
+    // Auth redirect
     useEffect(() => {
         if (_hasHydrated && !isAuthenticated) {
             router.push('/auth/login');
         }
     }, [_hasHydrated, isAuthenticated, router]);
 
-    if (!_hasHydrated || isProfileLoading) {
+    const isOwn = currentUser?.username === username;
+
+    if (!_hasHydrated || isProfileLoading || isFollowersLoading) {
         return (
             <MainLayout>
                 <div className="flex h-screen items-center justify-center">
@@ -53,7 +57,9 @@ export default function Followers({ params }: ProfilePageProps) {
         return (
             <MainLayout>
                 <div className="flex flex-col items-center justify-center h-[50vh] p-8 text-center">
-                    <h2 className="text-2xl font-bold mb-2">This account doesn&apos;t exist</h2>
+                    <h2 className="text-2xl font-bold mb-2">
+                        This account doesn&apos;t exist
+                    </h2>
                     <p className="text-secondary-foreground opacity-60">
                         Try searching for another.
                     </p>
@@ -62,17 +68,27 @@ export default function Followers({ params }: ProfilePageProps) {
         );
     }
 
-    const isOwn = currentUser?.username === username;
-
     return (
         <MainLayout>
-            <FollowingFollowersHeader profile={profile} isOwn={isOwn} headerType='followers' />
+            <FollowingFollowersHeader
+                profile={profile}
+                isOwn={isOwn}
+                headerType="followers"
+            />
+
             <div className="flex flex-col mt-5 mb-15">
-                {
-                    Array(10).fill(0).map((item, key) =>
-                        <ProfileCard profile={profile} key={key} username={profile.username} />)
-                }
+                {followersList?.length === 0 && (
+                    <p className="text-center opacity-60">No followers yet</p>
+                )}
+
+                {followersList?.map((follower) => (
+                    <ProfileCard
+                        key={follower.id}
+                        profile={follower}
+                        username={follower.username}
+                    />
+                ))}
             </div>
         </MainLayout>
-    )
+    );
 }

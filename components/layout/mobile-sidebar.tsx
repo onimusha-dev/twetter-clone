@@ -1,7 +1,8 @@
-import { cn } from "@/lib/utils";
-import { INavItems } from "@/types/ui";
-import { Link, Menu, X } from "lucide-react";
-import React from "react";
+import { cn } from '@/lib/utils';
+import { INavItems } from '@/types/ui';
+import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
 
 export const MobileSideBar = ({ navItems }: { navItems: INavItems[] }) => {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
