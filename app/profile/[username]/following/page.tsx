@@ -63,10 +63,10 @@ export default function Following({ params }: ProfilePageProps) {
                     <p className="text-center opacity-60">Not following anyone yet</p>
                 )}
                 {followingList?.map((followingUser) => (
-                    <ProfileCard 
-                        key={followingUser.id} 
-                        profile={followingUser} 
-                        username={followingUser.username} 
+                    <ProfileCard
+                        key={followingUser.id}
+                        profile={followingUser}
+                        username={followingUser.username}
                     />
                 ))}
             </div>

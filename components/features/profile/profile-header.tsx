@@ -1,15 +1,14 @@
 'use client';
 
-import { ArrowLeft, Calendar, Link as LinkIcon, MapPin, Loader2 } from 'lucide-react';
+import { ArrowLeft, Calendar, Link as LinkIcon, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Profile } from '@/types/user';
 import { cn, getMediaUrl } from '@/lib/utils';
 import { useFollow, useUnfollow } from '@/hooks/queries/useProfile';
 import { VerificationBadge } from '@/components/ui/verification-badge';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import EditProfileModal from './edit-profile-modal';
 import Link from 'next/link';
-import api from '@/lib/api';
 
 interface ProfileHeaderProps {
     profile: Profile;
@@ -30,7 +29,7 @@ export default function ProfileHeader({ profile, isOwn }: ProfileHeaderProps) {
                 await followMutation.mutateAsync(profile.id);
             }
         } catch (error) {
-            window.alert(`Unable to ${profile.isFollowing ? "Unfollow" : "Follow."}`);
+            window.alert(`Unable to ${profile.isFollowing ? 'Unfollow' : 'Follow.'}`);
         }
     };
 
@@ -102,7 +101,9 @@ export default function ProfileHeader({ profile, isOwn }: ProfileHeaderProps) {
                             ) : (
                                 <button
                                     onClick={handleFollow}
-                                    disabled={followMutation.isPending || unfollowMutation.isPending}
+                                    disabled={
+                                        followMutation.isPending || unfollowMutation.isPending
+                                    }
                                     className={cn(
                                         'rounded-full px-5 py-1.5 font-bold transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-w-28',
                                         profile.isFollowing
@@ -114,11 +115,17 @@ export default function ProfileHeader({ profile, isOwn }: ProfileHeaderProps) {
                                         <Loader2 className="h-4 w-4 animate-spin mx-auto" />
                                     ) : (
                                         <>
-                                            <span className={profile.isFollowing ? 'group-hover:hidden' : ''}>
+                                            <span
+                                                className={
+                                                    profile.isFollowing ? 'group-hover:hidden' : ''
+                                                }
+                                            >
                                                 {profile.isFollowing ? 'Following' : 'Follow'}
                                             </span>
                                             {profile.isFollowing && (
-                                                <span className="hidden group-hover:inline">Unfollow</span>
+                                                <span className="hidden group-hover:inline">
+                                                    Unfollow
+                                                </span>
                                             )}
                                         </>
                                     )}

@@ -1,13 +1,10 @@
 'use client';
 
-import { ArrowLeft, Calendar, Link as LinkIcon, MapPin } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Profile } from '@/types/user';
-import { cn, getMediaUrl } from '@/lib/utils';
 import { VerificationBadge } from '@/components/ui/verification-badge';
-import React, { useState } from 'react';
-import EditProfileModal from './edit-profile-modal';
-import Link from 'next/link';
+import { useState } from 'react';
 
 interface ProfileHeaderProps {
     profile: Profile;

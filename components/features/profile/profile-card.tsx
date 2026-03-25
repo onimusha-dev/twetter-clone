@@ -9,7 +9,7 @@ export default function ProfileCard({ profile, username }: { profile: any; usern
     const { user: currentUser } = useAuthStore();
     const followMutation = useFollow();
     const unfollowMutation = useUnfollow();
-    
+
     const isOwn = currentUser?.id === profile.id;
 
     const handleFollow = async (e: React.MouseEvent) => {
@@ -22,7 +22,7 @@ export default function ProfileCard({ profile, username }: { profile: any; usern
                 await followMutation.mutateAsync(profile.id);
             }
         } catch (error) {
-            window.alert(`Unable to ${profile.isFollowing ? "Unfollow" : "Follow."}`);
+            window.alert(`Unable to ${profile.isFollowing ? 'Unfollow' : 'Follow.'}`);
         }
     };
 
@@ -51,31 +51,31 @@ export default function ProfileCard({ profile, username }: { profile: any; usern
                 <div className="flex justify-between items-center w-full">
                     <div className="flex flex-col pb-2">
                         <span className="text-xl font-extrabold leading-tight capitalize hover:underline">
-                            <span>
-                                {profile.name}
-                            </span>
-                            {profile.isVerified && <VerificationBadge size={16} className='ml-2'/>}
+                            <span>{profile.name}</span>
+                            {profile.isVerified && <VerificationBadge size={16} className="ml-2" />}
                         </span>
                         <span className="text-secondary-foreground opacity-60 select-text">
                             @{profile.username}
                         </span>
                     </div>
                     {!isOwn && (
-                        <button 
+                        <button
                             onClick={handleFollow}
                             disabled={followMutation.isPending || unfollowMutation.isPending}
                             className={cn(
-                                "px-5 py-2 rounded-full transition-all duration-300 font-bold disabled:opacity-50 disabled:cursor-not-allowed",
-                                profile.isFollowing 
-                                    ? "border border-border-ui hover:bg-destructive/10 hover:text-destructive hover:border-destructive group min-w-28" 
-                                    : "bg-accent-ui hover:bg-accent-ui/75"
+                                'px-5 py-2 rounded-full transition-all duration-300 font-bold disabled:opacity-50 disabled:cursor-not-allowed',
+                                profile.isFollowing
+                                    ? 'border border-border-ui hover:bg-destructive/10 hover:text-destructive hover:border-destructive group min-w-28'
+                                    : 'bg-accent-ui hover:bg-accent-ui/75',
                             )}
                         >
                             {followMutation.isPending || unfollowMutation.isPending ? (
                                 <Loader2 className="h-4 w-4 animate-spin mx-auto" />
                             ) : (
                                 <>
-                                    <span className={profile.isFollowing ? "group-hover:hidden" : ""}>
+                                    <span
+                                        className={profile.isFollowing ? 'group-hover:hidden' : ''}
+                                    >
                                         {profile.isFollowing ? 'Following' : 'Follow'}
                                     </span>
                                     {profile.isFollowing && (

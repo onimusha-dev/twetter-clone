@@ -9,10 +9,8 @@ export const profileKeys = {
     all: ['profile'] as const,
     byUsername: (username: string) => [...profileKeys.all, 'username', username] as const,
     byId: (id: string) => [...profileKeys.all, 'id', id] as const,
-    followers: (id: number) =>
-        [...profileKeys.all, 'followers', id] as const,
-    following: (id: number) =>
-        [...profileKeys.all, 'following', id] as const,
+    followers: (id: number) => [...profileKeys.all, 'followers', id] as const,
+    following: (id: number) => [...profileKeys.all, 'following', id] as const,
 };
 
 export const useProfile = (username: string) => {
@@ -92,7 +90,7 @@ export const useGetFollowing = (id: number) => {
             console.log(`[useGetFollowing] Fetching from: ${url}`);
             const response = await api.get<any>(url);
             console.log(`[useGetFollowing] RAW Response:`, response.data);
-            
+
             const following = response.data?.data || response.data || [];
             return Array.isArray(following) ? following : [];
         },
@@ -143,7 +141,9 @@ export const useFollow = () => {
 
                 // Handle Case: List of Users (Direct Array)
                 if (Array.isArray(old)) {
-                    return old.map((u: any) => (u.id === targetId ? { ...u, isFollowing: true } : u));
+                    return old.map((u: any) =>
+                        u.id === targetId ? { ...u, isFollowing: true } : u,
+                    );
                 }
 
                 // Handle Case: Response Object { status, data }
@@ -156,7 +156,7 @@ export const useFollow = () => {
                     // If it's a list inside data
                     if (Array.isArray(old.data)) {
                         newData = old.data.map((u: any) =>
-                            u.id === targetId ? { ...u, isFollowing: true } : u
+                            u.id === targetId ? { ...u, isFollowing: true } : u,
                         );
                     }
 
@@ -210,7 +210,9 @@ export const useUnfollow = () => {
 
                 // Handle Case: List of Users (Direct Array)
                 if (Array.isArray(old)) {
-                    return old.map((u: any) => (u.id === targetId ? { ...u, isFollowing: false } : u));
+                    return old.map((u: any) =>
+                        u.id === targetId ? { ...u, isFollowing: false } : u,
+                    );
                 }
 
                 // Handle Case: Response Object { status, data }
@@ -220,7 +222,7 @@ export const useUnfollow = () => {
 
                     if (Array.isArray(old.data)) {
                         newData = old.data.map((u: any) =>
-                            u.id === targetId ? { ...u, isFollowing: false } : u
+                            u.id === targetId ? { ...u, isFollowing: false } : u,
                         );
                     }
 

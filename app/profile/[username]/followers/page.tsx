@@ -20,19 +20,12 @@ export default function Followers({ params }: ProfilePageProps) {
     const { user: currentUser, isAuthenticated, _hasHydrated } = useAuthStore();
 
     // Fetch profile
-    const {
-        data: response,
-        isLoading: isProfileLoading,
-        isError,
-    } = useProfile(username);
+    const { data: response, isLoading: isProfileLoading, isError } = useProfile(username);
 
     const profile = response?.data;
 
     // Fetch followers (React Query)
-    const {
-        data: followersList,
-        isLoading: isFollowersLoading,
-    } = useGetFollowers(profile?.id!);
+    const { data: followersList, isLoading: isFollowersLoading } = useGetFollowers(profile?.id!);
 
     // Auth redirect
     useEffect(() => {
@@ -57,9 +50,7 @@ export default function Followers({ params }: ProfilePageProps) {
         return (
             <MainLayout>
                 <div className="flex flex-col items-center justify-center h-[50vh] p-8 text-center">
-                    <h2 className="text-2xl font-bold mb-2">
-                        This account doesn&apos;t exist
-                    </h2>
+                    <h2 className="text-2xl font-bold mb-2">This account doesn&apos;t exist</h2>
                     <p className="text-secondary-foreground opacity-60">
                         Try searching for another.
                     </p>
@@ -70,11 +61,7 @@ export default function Followers({ params }: ProfilePageProps) {
 
     return (
         <MainLayout>
-            <FollowingFollowersHeader
-                profile={profile}
-                isOwn={isOwn}
-                headerType="followers"
-            />
+            <FollowingFollowersHeader profile={profile} isOwn={isOwn} headerType="followers" />
 
             <div className="flex flex-col mt-5 mb-15">
                 {followersList?.length === 0 && (
